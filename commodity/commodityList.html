@@ -1,0 +1,25 @@
+<ul class="list-group" >
+    <li class="list-group-item"  ng-repeat="commodity in commodities | filter:query | orderBy:orderBy">
+        <div class="row">
+            <div class="col-sm-3">
+                <a href="#commodity/{{commodity.id}}">
+                    <img src="" alt="sssss">
+                </a>
+            </div>
+            <div class="col-sm-9">
+                <blockquote>
+                    <a href="#commodity/{{commodity.id}}">
+                        <h2>{{commodity.name}}</h2>
+                    </a>
+                    <footer>{{commodity.brand}}</footer>
+                </blockquote>
+                <div class="text-right">
+                    <button class="btn btn-primary">
+                        <span class="glyphicon glyphicon-shopping-cart"></span>
+                        ￥{{commodity.price}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>

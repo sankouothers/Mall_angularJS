@@ -6,24 +6,19 @@
 
 
     <title>Mall</title>
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/bootstrap-3.3.5/css/bootstrap.css" rel="stylesheet">
     <style>
-        a,a:hover{
+        a, a:hover {
             text-decoration: none;
         }
     </style>
-    <script src="https://cdn.bootcss.com/angular.js/1.5.8/angular.js"></script>
-    <script src="https://cdn.bootcss.com/angular.js/1.5.8/angular-route.js"></script>
-    <script src="https://cdn.bootcss.com/angular.js/1.5.8/angular-resource.js"></script>
-    <script src="https://cdn.bootcss.com/angular.js/1.5.8/angular-animate.js"></script>
-
-    <!--<link href="/bootstrap/bootstrap-3.3.5/css/bootstrap.css" rel="stylesheet">-->
-    <!--<script src="/angularjs/angular-1.5.8/angular.js"></script>-->
-    <!--<script src="/angularjs/angular-1.5.8/angular-route.js"></script>-->
-    <!--<script src="/angularjs/angular-1.5.8/angular-resource.js"></script>-->
-    <!--<script src="/angularjs/angular-1.5.8/angular-animate.js"></script>-->
+    <link href="bootstrap/bootstrap-3.3.5/css/bootstrap.css" rel="stylesheet">
+    <script src="angularjs/angular-1.5.8/angular.js"></script>
+    <script src="angularjs/angular-1.5.8/angular-route.js"></script>
+    <script src="angularjs/angular-1.5.8/angular-resource.js"></script>
+    <script src="angularjs/angular-1.5.8/angular-animate.js"></script>
 </head>
-<body class="container" ng-controller="commodityController">
+<body class="container" ng-controller="commodityListController">
 <header class=page-header>
     <h1>Mall</h1>
 </header>
@@ -41,37 +36,12 @@
     </div>
 </div>
 
-<p></p>
-
-<ul class="list-group" >
-    <li class="list-group-item"  ng-repeat="commodity in commodities | filter:query | orderBy:orderBy">
-        <div class="row">
-            <div class="col-sm-3">
-                <a href="#/{{commodity.id}}">
-                    <img src="" alt="sssss">
-                </a>
-            </div>
-            <div class="col-sm-9">
-                <blockquote>
-                    <a href="#/{{commodity.id}}">
-                    <h2>{{commodity.name}}</h2>
-                    </a>
-                    <footer>{{commodity.brand}}</footer>
-                </blockquote>
-                <div class="text-right">
-                    <button class="btn btn-primary">
-                        <span class="glyphicon glyphicon-shopping-cart"></span>
-                        ￥{{commodity.price}}
-                    </button>
-                </div>
-            </div>
-        </div>
-    </li>
-</ul>
+<div ng-view></div>
 
 <script>
-    var mallApp = angular.module("mallApp",[])
-    mallApp.controller("commodityController",function ($scope, $http) {
+    var mallApp = angular.module("mallApp", ["ngRoute"]);
+
+    mallApp.controller("commodityListController", function ($scope, $http) {
         $http.get('http://localhost:8082/commodity').then(
             function(response){
                 $scope.commodities = response.data;
@@ -84,9 +54,24 @@
         $scope.orderBy = "name"
     });
 
-    mallApp.controller("commodityInfoController",function ($scope, $http) {
+    mallApp.controller("commodityInfoController",function ($scope, $http,$routeParams) {
+        $scope.id=$routeParams.id
+    });
 
-    })
+    mallApp.config(function ($routeProvider) {
+        $routeProvider
+            .when("/commodity", {
+                templateUrl: "commodity/commodityList.html",
+                controller: "commodityListController"
+            })
+            .when("/commodity/:id", {
+                templateUrl: "commodity/commodityInfo.html",
+                controller: "commodityInfoController"
+            })
+            .otherwise({
+                redirectTo: "/commodity"
+            });
+    });
 
 </script>
 </body>
