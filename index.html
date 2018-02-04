@@ -24,5 +24,42 @@
 </header>
 
 
+<ul class="list-group" >
+    <li class="list-group-item"  ng-repeat="commodity in commodities">
+        <div class="row">
+            <div class="col-sm-3">
+                <img src="" alt="sssss">
+            </div>
+            <div class="col-sm-9">
+                <blockquote>
+                    <h2>{{commodity.name}}</h2>
+                    <footer>{{commodity.brand}}</footer>
+                </blockquote>
+                <div class="text-right">
+                    <button class="btn btn-primary">
+                        <span class="glyphicon glyphicon-shopping-cart"></span>
+                        ￥{{commodity.price}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
+
+<script>
+    var mallApp = angular.module("mallApp",[])
+    mallApp.controller("commoditycontroller",function ($scope, $http) {
+        $http.get('http://localhost:8082/commodity').then(
+            function(response){
+                $scope.commodities = response.data;
+                console.log(response)
+            },
+            function(errResponse){
+                alert("链接错误")
+            }
+        );
+    })
+
+</script>
 </body>
 </html>
