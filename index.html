@@ -7,6 +7,11 @@
 
     <title>Mall</title>
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+    <style>
+        a,a:hover{
+            text-decoration: none;
+        }
+    </style>
     <script src="https://cdn.bootcss.com/angular.js/1.5.8/angular.js"></script>
     <script src="https://cdn.bootcss.com/angular.js/1.5.8/angular-route.js"></script>
     <script src="https://cdn.bootcss.com/angular.js/1.5.8/angular-resource.js"></script>
@@ -18,7 +23,7 @@
     <!--<script src="/angularjs/angular-1.5.8/angular-resource.js"></script>-->
     <!--<script src="/angularjs/angular-1.5.8/angular-animate.js"></script>-->
 </head>
-<body class="container" ng-controller="commoditycontroller">
+<body class="container" ng-controller="commodityController">
 <header class=page-header>
     <h1>Mall</h1>
 </header>
@@ -42,11 +47,15 @@
     <li class="list-group-item"  ng-repeat="commodity in commodities | filter:query | orderBy:orderBy">
         <div class="row">
             <div class="col-sm-3">
-                <img src="" alt="sssss">
+                <a href="#/{{commodity.id}}">
+                    <img src="" alt="sssss">
+                </a>
             </div>
             <div class="col-sm-9">
                 <blockquote>
+                    <a href="#/{{commodity.id}}">
                     <h2>{{commodity.name}}</h2>
+                    </a>
                     <footer>{{commodity.brand}}</footer>
                 </blockquote>
                 <div class="text-right">
@@ -62,7 +71,7 @@
 
 <script>
     var mallApp = angular.module("mallApp",[])
-    mallApp.controller("commoditycontroller",function ($scope, $http) {
+    mallApp.controller("commodityController",function ($scope, $http) {
         $http.get('http://localhost:8082/commodity').then(
             function(response){
                 $scope.commodities = response.data;
@@ -73,6 +82,10 @@
             }
         );
         $scope.orderBy = "name"
+    });
+
+    mallApp.controller("commodityInfoController",function ($scope, $http) {
+
     })
 
 </script>
