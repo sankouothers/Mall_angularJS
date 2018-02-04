@@ -23,18 +23,6 @@
     <h1>Mall</h1>
 </header>
 
-<div class="row">
-    <div class="col-sm-4"></div>
-    <div class="col-sm-4">
-        <select ng-model="orderBy" class="form-control">
-            <option value="name">name</option>
-            <option value="price">price</option>
-        </select>
-    </div>
-    <div class="col-sm-4">
-        <input class="form-control" placeholder="Input query condition" ng-model="query">
-    </div>
-</div>
 
 <div ng-view></div>
 
@@ -44,18 +32,26 @@
     mallApp.controller("commodityListController", function ($scope, $http) {
         $http.get('http://localhost:8082/commodity').then(
             function(response){
-                $scope.commodities = response.data;
-                console.log(response)
-            },
-            function(errResponse){
-                alert("链接错误")
+                if (response.status == 200){
+                    $scope.commodities = response.data;
+                }else{
+                    alert("链接错误")
+                }
             }
         );
         $scope.orderBy = "name"
     });
 
     mallApp.controller("commodityInfoController",function ($scope, $http,$routeParams) {
-        $scope.id=$routeParams.id
+        $http.get('http://localhost:8082/commodity'+'/'+$routeParams.id).then(
+            function(response){
+                if (response.status == 200){
+                    $scope.commodity = response.data;
+                }else{
+                    alert("链接错误")
+                }
+            }
+        );
     });
 
     mallApp.config(function ($routeProvider) {

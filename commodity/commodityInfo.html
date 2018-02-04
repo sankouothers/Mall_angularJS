@@ -1,1 +1,22 @@
-{{id}}
+<section class="content">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-5">
+                <img src="" alt="图片">
+            </div>
+            <div class="col-lg-7">
+                <ul class="list-group">
+                    <li class="list-group-item">名称 {{commodity.name}}</li>
+                    <li class="list-group-item">品牌: {{commodity.brand}}</li>
+                    <li class="list-group-item">类别: {{commodity.category}}</li>
+                    <li class="list-group-item">功能: {{commodity.effect}}</li>
+                    <li class="list-group-item">价格: ￥{{commodity.price}}</li>
+                </ul>
+                <a class="btn btn-primary" methods="get" href="/indent/create?id=${command.id}">加入购物车</a>
+                <button class="btn btn-primary">购买</button>
+            </div>
+        </div>
+    </div>
+
+</section>
