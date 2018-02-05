@@ -1,22 +1,30 @@
-<section class="content">
-    <div class="container">
-
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span>
+            <h4 class="text-primary">Commodity Info</h4>
+        </span>
+    </div>
+    <div class="panel-body">
         <div class="row">
-            <div class="col-lg-5">
-                <img src="" alt="图片">
+            <div class="col-sm-4">
+                <img ng-src="" alt="图片">
             </div>
-            <div class="col-lg-7">
-                <ul class="list-group">
-                    <li class="list-group-item">名称 {{commodity.name}}</li>
-                    <li class="list-group-item">品牌: {{commodity.brand}}</li>
-                    <li class="list-group-item">类别: {{commodity.category}}</li>
-                    <li class="list-group-item">功能: {{commodity.effect}}</li>
-                    <li class="list-group-item">价格: ￥{{commodity.price}}</li>
-                </ul>
-                <a class="btn btn-primary" methods="get" href="/indent/create?id=${command.id}">加入购物车</a>
-                <button class="btn btn-primary">购买</button>
+            <div class="col-sm-7">
+                <section class="content">
+                    <ul class="list-group">
+                        <li class="list-group-item">名称 {{commodity.name}}</li>
+                        <li class="list-group-item">品牌: {{commodity.brand}}</li>
+                        <li class="list-group-item">类别: {{commodity.category}}</li>
+                        <li class="list-group-item">功能: {{commodity.effect}}</li>
+                        <li class="list-group-item">价格: ￥{{commodity.price}}</li>
+                    </ul>
+                    <a class="btn btn-primary" methods="get" href="/indent/create?id=${command.id}">加入购物车</a>
+                    <button class="btn btn-primary">购买</button>
+                </section>
             </div>
         </div>
     </div>
-
-</section>
+    <div class="panel-footer">
+        <a  href="javascript:history.back()">Back commodity List</a>
+    </div>
+</div>
