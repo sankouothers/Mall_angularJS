@@ -1,0 +1,1 @@
+var mallApp = angular.module("mallApp", ["mallAppRoutes","mallAppControllers"]);

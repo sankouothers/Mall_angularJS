@@ -17,8 +17,11 @@
     <script src="angularjs/angular-1.5.8/angular-route.js"></script>
     <script src="angularjs/angular-1.5.8/angular-resource.js"></script>
     <script src="angularjs/angular-1.5.8/angular-animate.js"></script>
+    <script src="js/mallAppControllers.js"></script>
+    <script src="js/mallAppRoutes.js"></script>
+    <script src="js/apps.js"></script>
 </head>
-<body class="container" ng-controller="commodityListController">
+<body class="container">
 <header class=page-header>
     <h1>Mall</h1>
 </header>
@@ -26,77 +29,5 @@
 
 <div ng-view></div>
 
-<script>
-    var mallApp = angular.module("mallApp", ["ngRoute"]);
-
-    mallApp.controller("commodityListController", function ($scope, $http) {
-        $http.get('http://localhost:8082/commodity').then(
-            function(response){
-                if (response.status == 200){
-                    $scope.commodities = response.data;
-                }else{
-                    alert("链接错误")
-                }
-            }
-        );
-        $scope.orderBy = "name"
-    });
-
-    mallApp.controller("commodityInfoController",function ($scope, $http,$location,$routeParams) {
-        $http.get('http://localhost:8082/commodity'+'/'+$routeParams.id).then(
-            function(response){
-                if (response.status == 200){
-                    $scope.commodity = response.data;
-                }else{
-                    alert("链接错误")
-                }
-            }
-        );
-        $scope.createIndent = function (id) {
-            $http.get('http://localhost:8082/indent/create/'+id).then(
-                function(response){
-                    if (response.status == 200){
-                        $location.path("/indent");
-                    }else{
-                        alert("链接错误")
-                    }
-                }
-            );
-        }
-    });
-
-    mallApp.controller("indentListController",function ($scope, $http,$location,$routeParams) {
-        $http.get('http://localhost:8082/indent').then(
-            function(response){
-                if (response.status == 200){
-                    console.log(response.data)
-                    $scope.indents = response.data;
-                }else{
-                    alert("链接错误")
-                }
-            }
-        );
-    });
-
-    mallApp.config(function ($routeProvider) {
-        $routeProvider
-            .when("/commodity", {
-                templateUrl: "commodity/commodityList.html",
-                controller: "commodityListController"
-            })
-            .when("/commodity/:id", {
-                templateUrl: "commodity/commodityInfo.html",
-                controller: "commodityInfoController"
-            })
-            .when("/indent", {
-                templateUrl: "indent/indentList.html",
-                controller: "indentListController"
-            })
-            .otherwise({
-                redirectTo: "/commodity"
-            });
-    });
-
-</script>
 </body>
 </html>
