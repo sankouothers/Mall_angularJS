@@ -42,11 +42,35 @@
         $scope.orderBy = "name"
     });
 
-    mallApp.controller("commodityInfoController",function ($scope, $http,$routeParams) {
+    mallApp.controller("commodityInfoController",function ($scope, $http,$location,$routeParams) {
         $http.get('http://localhost:8082/commodity'+'/'+$routeParams.id).then(
             function(response){
                 if (response.status == 200){
                     $scope.commodity = response.data;
+                }else{
+                    alert("链接错误")
+                }
+            }
+        );
+        $scope.createIndent = function (id) {
+            $http.get('http://localhost:8082/indent/create/'+id).then(
+                function(response){
+                    if (response.status == 200){
+                        $location.path("/indent");
+                    }else{
+                        alert("链接错误")
+                    }
+                }
+            );
+        }
+    });
+
+    mallApp.controller("indentListController",function ($scope, $http,$location,$routeParams) {
+        $http.get('http://localhost:8082/indent').then(
+            function(response){
+                if (response.status == 200){
+                    console.log(response.data)
+                    $scope.indents = response.data;
                 }else{
                     alert("链接错误")
                 }
@@ -63,6 +87,10 @@
             .when("/commodity/:id", {
                 templateUrl: "commodity/commodityInfo.html",
                 controller: "commodityInfoController"
+            })
+            .when("/indent", {
+                templateUrl: "indent/indentList.html",
+                controller: "indentListController"
             })
             .otherwise({
                 redirectTo: "/commodity"
