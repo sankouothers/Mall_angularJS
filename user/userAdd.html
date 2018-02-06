@@ -1,0 +1,84 @@
+
+<div class="well">
+
+    <div class="clearfix">
+        <h1 class="text-center">
+            用户注册
+        </h1>
+        <form class="form-horizontal" name="userForm">
+            <input name="id" ng-model="user.id" hidden>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">UserName:</label>
+                <div class="col-sm-10">
+                    <input name="name" type="text" class="form-control" ng-model="user.name"ng-minlength="4" ng-maxlength="10" required placeholder="UserName">
+                    <p class="error" ng-if="userForm.name.$touched && userForm.name.$error.required">用户名不能为空</p>
+                    <p class="error" ng-if="userForm.name.$touched && (userForm.name.$error.minlength || userForm.name.$error.maxlength)">用户名长度不小于4位，不大于10位</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">PassWord:</label>
+                <div class="col-sm-10">
+                    <input name="passWord" type="password" class="form-control" ng-model="user.passWord"ng-minlength="8" ng-maxlength="10" required placeholder="PassWord">
+                    <p class="error" ng-if="userForm.passWord.$touched && userForm.passWord.$error.required">密码不能为空</p>
+                    <p class="error" ng-if="userForm.passWord.$touched && (userForm.passWord.$error.minlength || userForm.passWord.$error.maxlength)">密码长度不小于8位，不大于10位</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Confirm password:</label>
+                <div class="col-sm-10">
+                    <input name="passWordValidator" type="password" class="form-control" ng-model="user.passWordValidator"ng-minlength="8" ng-maxlength="10" required placeholder="Confirm password">
+                    <p class="error" ng-if="userForm.passWordValidator.$touched && userForm.passWordValidator.$error.required">密码不能为空</p>
+                    <p class="error" ng-if="userForm.passWordValidator.$touched && (userForm.passWordValidator.$error.minlength || userForm.passWordValidator.$error.maxlength)">密码长度不小于8位，不大于10位</p>
+                    <p class="error" ng-if="userForm.passWordValidator.$touched && (userForm.passWordValidator.$viewValue != userForm.passWord.$viewValue)">两次输入密码不一致</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Phone Number:</label>
+                <div class="col-sm-10">
+                    <input name="phoneNumber" type="number" class="form-control" ng-model="user.phoneNumber" ng-minlength="11" ng-maxlength="11" placeholder="Phone Number">
+                    <p class="error" ng-if="userForm.phoneNumber.$touched && (userForm.phoneNumber.$error.minlength || userForm.phoneNumber.$error.maxlength)">电话号码长度必须为11位</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">IDCardNumber:</label>
+                <div class="col-sm-10">
+                    <input name="IDcard" class="form-control" ng-model="user.IDcard" ng-minlength="18" ng-maxlength="18" placeholder="IDCardNumber"
+                           onkeyup="this.value=this.value.replace(/\D/g,'')" >
+                    <p class="error" ng-if="userForm.IDcard.$touched && (userForm.IDcard.$error.minlength || userForm.IDcard.$error.maxlength)">身份证号码长度必须为18位</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Question:</label>
+                <div class="col-sm-10">
+                    <input name="question" type="text" class="form-control" ng-model="user.question" ng-maxlength="50" placeholder="Question">
+                    <p class="error" ng-if="userForm.question.$touched && userForm.question.$error.maxlength">密保问题不能超过50位</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Answer:</label>
+                <div class="col-sm-10">
+                    <input name="answer" type="text" class="form-control" ng-model="user.answer" ng-maxlength="50" placeholder="Answer">
+                    <p class="error" ng-if="userForm.answer.$touched && userForm.answer.$error.maxlength">密保答案不能超过50位</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+
+                    <button type="submit" class="btn btn-primary"
+                            ng-click="submitForm()"
+                    >Submit</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+

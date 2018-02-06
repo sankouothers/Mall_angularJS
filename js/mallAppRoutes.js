@@ -10,9 +10,17 @@ mallAppRoutes.config(function ($routeProvider) {
             templateUrl: "commodity/commodityInfo.html",
             controller: "commodityInfoController"
         })
+        .when("/create/commodity",{
+            templateUrl: "commodity/commodityAdd.html",
+            controller: "commodityAddController"
+        })
         .when("/indent", {
             templateUrl: "indent/indentList.html",
             controller: "indentListController"
+        })
+        .when("/user/add",{
+            templateUrl:"user/userAdd.html",
+            controller:"userAddController"
         })
         .otherwise({
             redirectTo: "/commodity"

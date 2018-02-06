@@ -47,3 +47,52 @@ mallAppControllers.controller("indentListController",function ($scope, $http,$lo
         }
     );
 });
+
+
+mallAppControllers.controller("userAddController",function ($scope, $http,$location,$routeParams,$templateCache) {
+    $scope.submitForm=function () {
+        $http({
+            method: 'POST',
+            url: 'http://localhost:8082/user',
+            cache: $templateCache
+        }).then(function(response) {
+            if (response.status == 200){
+                console.log("111111")
+            }else{
+                alert("链接错误")
+            }
+        });
+
+
+
+
+        // $http.jsonp('http://localhost:8082/user', $scope.user).then(
+        //     function (response) {
+        //         console.log('response', response)
+        //         if (response.status == 200){
+        //             console.log("111111")
+        //         }else{
+        //             alert("链接错误")
+        //         }
+        //     }
+        // );
+
+    }
+});
+
+
+mallAppControllers.controller("commodityAddController",function ($scope, $http,$location,$routeParams) {
+    $scope.submitForm=function () {
+        console.log($scope.commodity);
+        $http.post('http://localhost:8082/commodity',$scope.commodity,config).then(
+            function (response) {
+                if (response.status == 200){
+                    console.log("111111")
+                }else{
+                    alert("链接错误")
+                }
+            }
+        );
+
+    }
+});
