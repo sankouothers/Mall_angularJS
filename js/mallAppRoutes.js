@@ -3,24 +3,28 @@ var mallAppRoutes = angular.module("mallAppRoutes",["ngRoute"])
 mallAppRoutes.config(function ($routeProvider) {
     $routeProvider
         .when("/commodity", {
-            templateUrl: "commodity/commodityList.html",
+            templateUrl: "pages/commodity/commodityList.html",
             controller: "commodityListController"
         })
         .when("/commodity/:id", {
-            templateUrl: "commodity/commodityInfo.html",
+            templateUrl: "pages/commodity/commodityInfo.html",
             controller: "commodityInfoController"
         })
         .when("/create/commodity",{
-            templateUrl: "commodity/commodityAdd.html",
+            templateUrl: "pages/commodity/commodityAdd.html",
             controller: "commodityAddController"
         })
         .when("/indent", {
-            templateUrl: "indent/indentList.html",
+            templateUrl: "pages/indent/indentList.html",
             controller: "indentListController"
         })
         .when("/user/add",{
-            templateUrl:"user/userAdd.html",
+            templateUrl:"pages/user/userAdd.html",
             controller:"userAddController"
+        })
+        .when("/login",{
+            templateUrl:"pages/login.html",
+            controller:"loginController"
         })
         .otherwise({
             redirectTo: "/commodity"

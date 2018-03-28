@@ -54,7 +54,10 @@ mallAppControllers.controller("userAddController",function ($scope, $http,$locat
         $http({
             method: 'POST',
             url: 'http://localhost:8082/user',
-            cache: $templateCache
+            headers: {
+                'Content-Type': 'application/xml;charset=UTF-8'
+            },
+            data: $scope.user
         }).then(function(response) {
             if (response.status == 200){
                 console.log("111111")
@@ -84,7 +87,24 @@ mallAppControllers.controller("userAddController",function ($scope, $http,$locat
 mallAppControllers.controller("commodityAddController",function ($scope, $http,$location,$routeParams) {
     $scope.submitForm=function () {
         console.log($scope.commodity);
-        $http.post('http://localhost:8082/commodity',$scope.commodity,config).then(
+        $http.post('http://localhost:8082/commodity',$scope.commodity).then(
+            function (response) {
+                if (response.status == 200){
+                    console.log("111111")
+                }else{
+                    alert("链接错误")
+                }
+            }
+        );
+
+    }
+});
+
+
+mallAppControllers.controller("loginController",function ($scope, $http,$location,$routeParams) {
+    $scope.submitForm=function () {
+        console.log($scope.userForm);
+        $http.post('http://localhost:8082/login',$scope.userForm).then(
             function (response) {
                 if (response.status == 200){
                     console.log("111111")
